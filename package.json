@@ -1,0 +1,30 @@
+{
+  "name": "codewars",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "test": "ts-mocha -p tsconfig.json test/**/*.spec.ts",
+    "prepush": "npm run test"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/voliseq/codewars.git"
+  },
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/voliseq/codewars/issues"
+  },
+  "homepage": "https://github.com/voliseq/codewars#readme",
+  "dependencies": {
+    "@types/mocha": "^5.2.5",
+    "@types/node": "^10.12.1",
+    "mocha": "^5.2.0",
+    "ts-node-register": "^1.0.0"
+  },
+  "devDependencies": {
+    "ts-mocha": "^2.0.0",
+    "typescript": "^3.1.5"
+  }
+}

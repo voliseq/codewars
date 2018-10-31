@@ -1,0 +1,17 @@
+{
+  "compilerOptions": {
+    "target": "es6",
+    "module": "commonjs",               
+    "lib": ["es6"],
+    "types": [
+      "node"
+    ],
+    "outDir": "./js",
+    "strict": true,
+    "baseUrl": "./ts",
+    "esModuleInterop": true  
+  },
+  "exclude": [
+    "**/*.spec.ts"
+  ]
+}
