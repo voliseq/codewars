@@ -4,25 +4,20 @@ function add(x, y, z) {
     return x + y + z;
 }
 function yack(fn, ...args) {
-    return ((fnLength, inArgs) => {
-        const diff = fnLength - inArgs.length;
-        let tArgs = [];
-        const recur = function a(count) {
-            if (count) {
-                return (...x) => {
-                    tArgs.push(...x);
-                    count -= x.length;
-                    return recur(count);
-                };
-            }
-            else {
-                tArgs = tArgs.length > diff ? tArgs.slice(0, diff) : tArgs;
-                return fn(...inArgs, ...tArgs);
-            }
-        };
-        return recur(diff);
-    })(fn.length, args);
+    const diff = fn.length - args.length;
+    const recur = function a(count, argsT) {
+        if (count) {
+            return (...x) => {
+                x = x.slice(0, diff - argsT.length);
+                return recur(count - x.length, [...argsT, ...x]);
+            };
+        }
+        else {
+            argsT = argsT.length > diff ? argsT.slice(0, diff) : argsT;
+            return fn(...args, ...argsT);
+        }
+    };
+    return recur(diff, []);
 }
 let test = yack(add);
-console.log(test(1)(2)(3));
-console.log(test(2)(3));
+console.log(test(1)(null, 4));

@@ -5,25 +5,21 @@ function add(x: number, y: number, z: number) {
 }
 
 function yack(fn: any, ...args: any) {
-    return ((fnLength: any, inArgs: any) => {
-        const diff = fnLength - inArgs.length;
-        let tArgs: any = [];
-        const recur = function a(count: number) {
-            if (count) {
-                return (...x: any) => {
-                    tArgs.push(...x);
-                    count -= x.length;
-                    return recur(count)
-                }
-            } else {
-                tArgs = tArgs.length > diff ? tArgs.slice(0, diff) : tArgs;
-                return fn(...inArgs, ...tArgs)
+
+    const diff = fn.length - args.length;
+    const recur = function a(count: number, argsT: Array<number>) {
+        if (count) {
+            return (...x: any) => {
+                x = x.slice(0, diff - argsT.length);
+                return recur(count - x.length, [...argsT, ...x])
             }
+        } else {
+            argsT = argsT.length > diff ? argsT.slice(0, diff) : argsT;
+            return fn(...args, ...argsT)
         }
-        return recur(diff)
-    })(fn.length, args)
+    }
+    return recur(diff, [])
 }
 
 let test = yack(add);
-console.log(test(1)(2)(3));
-console.log(test(2)(3));
+console.log(test(1)( null,4));
