@@ -1,10 +1,9 @@
-import { fchown } from "fs";
 
-function add(x: number, y: number, z: number) {
+export function add(x: number, y: number, z: number) {
     return x + y + z;
 }
 
-function yack(fn: any, ...args: any) {
+export function yack(fn: any, ...args: any) {
     if (args.length >= fn.length) {
         return fn(...args);
     } else {
